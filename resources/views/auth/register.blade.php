@@ -35,7 +35,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="text" name="user[cpf]"
-                            class="form-control {{$errors->has('user.cpf') ? 'is-invalid' : ''}}" placeholder="CPF"
+                            class="form-control cpf {{$errors->has('user.cpf') ? 'is-invalid' : ''}}" placeholder="CPF"
                             value="{{old('user.cpf')}}">
                             <div>{{$errors->first('user.cpf')}}</div>
                         </div>
@@ -110,14 +110,11 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input
-                                type="text"
-                                class="form-control {{$errors->has('address.number') ? 'is-invalid' : ''}}"
-                                class="form-control"
-                                placeholder="Número"
-                                value="{{old('address.number')}}"
-                            >
-                            <div>{{$errors->first('address.number')}}</div>
+                            <input type="text"
+                            class="form-control {{$errors->has('address.number') ? 'is-invalid' : ''}}"
+                            placeholder="Número" name="address[number]"
+                            value="{{old('address.number')}}">
+                            <div>{{ $errors->first('address.number') }}</div>
                         </div>
                     </div>
                     <div class="col-md-6">
