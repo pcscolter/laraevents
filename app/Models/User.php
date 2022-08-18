@@ -22,7 +22,18 @@ class User extends Model
 
     //mutators
     public function setPasswordAttribute($value){
+        $this->attributes['password'] = bcrypt($value);
+    }
 
-        
+    protected $hidden= [
+        'password'
+    ];
+
+    public function address(){
+        return $this->hasOne(Address::class);
+    }
+
+    public function phones(){
+        return $this->hasMany(Phone::class);
     }
 }
