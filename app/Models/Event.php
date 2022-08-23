@@ -28,6 +28,11 @@ class Event extends Model
         'target_audience'
     ];
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withPivot('present');
+    }
+
     public function setStartDateAttribute($value)
     {
         $this->attributes['start_date'] = Carbon::createFromFormat('d/m/Y H:i', $value)

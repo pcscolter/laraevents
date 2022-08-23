@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Http\Requests\Organization\Event\EventRequest;
-
+use App\Models\User;
+use App\Services\EventService;
 
 class EventController extends Controller
 {
@@ -34,6 +35,22 @@ class EventController extends Controller
             ->route('organization.events.index')
             ->with('success', 'Evento cadastrado com sucesso');
     }
+
+    public function show(Event $event)
+    {
+        return view('organization.events.show', [
+            'event'=>$event,
+            'eventStartDateHasPassed'=> EventService::eventStartDateHasPassed($event),
+            'eventEndDateHasPassed'=> EventService::eventEndDateHasPassed($event),
+            'allParticipantUsers'=> User::query()
+                ->where('role','participant')
+                ->whereDoesntHave('events', function($query) use ($event){
+                    $query->where('id', $event->id);
+                })
+                ->get()
+        ]);
+    }
+
     public function edit(Event $event)
     {
         // $event = Event::findOrFail($id);

@@ -31,11 +31,14 @@
                     <td class="align-middle">{{$event->end_date_formatted}}</td>
                     <td class="align-middle">
                         <div class="d-flex align-items-center">
-                            <a href="{{ route('organization.events.edit', $event->id) }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('organization.events.show', $event->id) }}" class="btn btn-sm btn-info mr-2">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            <a href="{{ route('organization.events.edit', $event->id) }}" class="btn btn-sm btn-primary mr-2">
                                 <i class="fa fa-edit"></i>
                             </a>
                         </div>
-                        <form action="{{route('organization.events.detroy', $event->id)}}" method="post">
+                        <form action="{{route('organization.events.destroy', $event->id)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm confirm-submit">
